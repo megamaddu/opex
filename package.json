@@ -1,0 +1,28 @@
+{
+  "name": "opex",
+  "version": "0.1.1",
+  "description": "A tiny, fast extend/mixin function with n-args and functions-as-objects support.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/spicydonuts/opex"
+  },
+  "keywords": [
+    "extend"
+  ],
+  "author": "Michael Trotter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spicydonuts/opex/issues"
+  },
+  "devDependencies": {
+    "expect.js": "~0.2.0"
+  }
+}
