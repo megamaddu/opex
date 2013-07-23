@@ -10,7 +10,10 @@ describe('opex:', function () {
 		
 		it('returns a new object', function () {	
 			var original = {};
-			expect(original === opex(original)).to.be(false);
+			var i = 5000;
+			while(--i) {
+				expect(original === opex(original)).to.be(false);
+			}
 		});
 
 		it('supports any number of arguments and overwrites with right-most args\' values', function () {	
@@ -21,13 +24,16 @@ describe('opex:', function () {
 			, v4 = { y: 5 }
 			, res = opex(original, v1)
 			;
-			expect(res.x).to.be(1);
-			res = opex(original, v1, v2, v3);
-			expect(res.x).to.be(1);
-			expect(res.y).to.be(2);
-			expect(res.z).to.be(3);
-			res = opex(res, v4);
-			expect(res.y).to.be(5);
+			var i = 1000;
+			while(i--) {
+				expect(res.x).to.be(1);
+				res = opex(original, v1, v2, v3);
+				expect(res.x).to.be(1);
+				expect(res.y).to.be(2);
+				expect(res.z).to.be(3);
+				res = opex(res, v4);
+				expect(res.y).to.be(5);
+			}
 		});
 
 		it('ignores non-object and non-function input', function () {
@@ -37,7 +43,10 @@ describe('opex:', function () {
 			, i = 42
 			;
 			f.data = 'asdf';
-			expect(opex(original, o, f, i).data).to.be('asdf');
+			var i = 3000;
+			while(i--) {
+				expect(opex(original, o, f, i).data).to.be('asdf');
+			}
 		});
 	});
 });

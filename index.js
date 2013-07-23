@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = function opex() {
-  var res = {}
+  var res = {}, _ = {};
   for (var i in arguments) {
-    extend(res, arguments[i] || {});
+    extend(res, arguments[i] || _);
   }
   return res;
 };
