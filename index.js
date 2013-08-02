@@ -1,5 +1,8 @@
 'use strict';
 
+var pkg = require('./package')
+;
+
 module.exports = function opex() {
   var res = {}, _ = {};
   for (var i in arguments) {
@@ -15,3 +18,5 @@ function extend(origin, add) {
     }
   }
 };
+
+Object.defineProperty(module.exports, 'version', { enumerable: true, value: pkg.version });
