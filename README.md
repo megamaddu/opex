@@ -19,14 +19,14 @@ function example(options) {
 * params are collapsed from left to right into the new object; right-most values override any to the left
 * non-object and non-function parameters are ignored, which allows for simple input sanitizing
 
-  consider:
 ```javascript
 var defaults = {};
 function example(a, b, c) {
   var options = opex(defaults, a, b, c);
 }
 ```
-  `options` will always be an object and `opex` will extend a new object with `defaults` and `b` even if `a` is `null` and `c` is an integer.  It will also work if any parameter is a function which has had additional properties assigned to it, i.e. when a module wants to export a function but appends some helper data or functions to the exported function.
+
+  In this case `opex` will extend `options` with `defaults` and `b` even if `a` is `null` and `c` is an integer.  It will also work if any parameter is a function which has had additional properties assigned to it, i.e. when a module wants to export a function but appends some helper data or functions to the exported function.
 
 # what about deep copy?
   Only where it makes sense.  `opex` is primarily indended to be used with JSON stuctures or a 'flat' object.  Rather than use a flag (or always-on/off) like some implementations, `opex` decides whether to recurse on each property individually.
