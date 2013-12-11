@@ -44,7 +44,7 @@ function x() { }  // no
 ```javascript
 var globalDefaults = {
     env: 'dev',
-    repo: {
+    logger: {
     }
   },
   
