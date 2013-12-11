@@ -1,6 +1,6 @@
 {
   "name": "opex",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A tiny, fast extend/mixin function with n-args and functions-as-objects support.",
   "main": "index.js",
   "directories": {

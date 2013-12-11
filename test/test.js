@@ -50,12 +50,13 @@ describe('opex:', function () {
       }
     });
 
-    it('deep copies', function () {
+    it('deep copies simple object but not complex ones (new Object(), {}, and Object.create() vs anything else)', function () {
       var original = {
         inner: {
           data: 'stuff',
           other: 'morestuff',
-          more: 5
+          more: 5,
+          array: ['a']
         }
       },
         o = {
@@ -68,13 +69,16 @@ describe('opex:', function () {
         i = 1,
         extended;
       f.inner = {
-        data: 'asdf'
+        data: 'asdf',
+        array: ['b']
       };
       while (i--) {
         extended = opex(original, o, f, i);
         expect(extended.inner.data).to.be('asdf');
         expect(extended.inner.other).to.be('newmorestuff');
         expect(extended.inner.more).to.be(5);
+        expect(extended.inner.array.length).to.be(1);
+        expect(extended.inner.array[0]).to.be('b');
       }
     });
 
