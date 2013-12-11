@@ -42,12 +42,35 @@ function x() { }  // no
 ```
   You get the idea.. sound complicated?  You'll find in most cases it's exactly what you would expect:
 ```javascript
-var globalDefaults = {
+var opex = require('opex'),
+  globalDefaults = {
     env: 'dev',
-    logger: {
+    log: {
+      level: 'debug'
     }
   },
-  
+  appDefaults = {
+    app: 'bar.com',
+    log: {
+      level: 'error'
+    },
+    key: 'bar'
+  };
+
+function App(options) {
+  // options = {
+  //   env: 'prod',
+  //   signer: <Crypto.Signer instance>,
+  //   customModule: <some custom utility>
+  // }
+  options = opex(globalDefaults, appDefaults, options);
+  options.end;          // 'prod'
+  options.log.level;    // 'error'
+  options.key;          // 'bar'
+  options.app;          // 'bar.com'
+  options.singer;       // <Crypto.Signer instance> (non-deep copy)
+  options.customModule; // <some custom utility> (non-deep copy)
+}
 ```
   
 # install
