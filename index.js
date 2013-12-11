@@ -3,20 +3,24 @@
 var pkg = require('./package')
 ;
 
-module.exports = function opex() {
-  var res = {}, _ = {};
-  for (var i in arguments) {
+function opex() {
+  var res = {}, _ = {}, i;
+  for (i in arguments) {
     extend(res, arguments[i] || _);
   }
   return res;
-};
+}
 
 function extend(origin, add) {
+  var j;
   if ('object' === typeof add || 'function' === typeof add) {
-    for (var j in add) {
-      origin[j] = add[j];
+    for (j in add) {
+      if (add.hasOwnProperty(j)) {
+        origin[j] = add[j];
+      }
     }
   }
-};
+}
 
-Object.defineProperty(module.exports, 'version', { enumerable: true, value: pkg.version });
+opex.version = pkg.version;
+module.exports = opex;
