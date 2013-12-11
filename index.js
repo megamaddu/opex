@@ -14,28 +14,30 @@ function opex() {
 }
 
 function extend(origin, add) {
+  var j, left, right;
+
   if (this.depth > 99) {
     throw new Error('opex exceeded 99 levels of depth -- most likely a circular reference error');
   }
-  var j, left, right;
-  if ('object' === typeof add || 'function' === typeof add) {
-    for (j in add) {
-      if (add.hasOwnProperty(j)) {
-        right = add[j];
-        if (('object' === typeof right || 'function' === typeof right) && right.__proto__ === Object.prototype) {
-          if (origin.hasOwnProperty(j)) {
-            left = origin[j];
-          } else {
-            left = {};
-          }
-          this.depth++;
-          extend.call(this, left, right);
-          origin[j] = left;
-          this.depth--;
-          continue;
-        }
+
+  for (j in add) {
+    if (add.hasOwnProperty(j)) {
+      right = add[j];
+
+      if ((typeof right !== 'object' && typeof right !== 'function') || right.__proto__ !== Object.prototype) {
         origin[j] = right;
+        continue;
       }
+
+      if (origin.hasOwnProperty(j)) {
+        left = origin[j];
+      } else {
+        origin[j] = left = {};
+      }
+
+      this.depth++;
+      extend.call(this, left, right);
+      this.depth--;
     }
   }
 }
