@@ -62,7 +62,8 @@ describe('opex:', function () {
         o = {
           inner: {
             data: 'newstuff',
-            other: 'newmorestuff'
+            other: 'newmorestuff',
+            foo: null
           }
         },
         f = function testFunc() {},
@@ -70,15 +71,18 @@ describe('opex:', function () {
         extended;
       f.inner = {
         data: 'asdf',
-        array: ['b']
+        array: ['b'],
+        bar: undefined
       };
       while (i--) {
         extended = opex(original, o, f, i);
         expect(extended.inner.data).to.be('asdf');
         expect(extended.inner.other).to.be('newmorestuff');
         expect(extended.inner.more).to.be(5);
+        expect(extended.inner.foo).to.be(null);
         expect(extended.inner.array.length).to.be(1);
         expect(extended.inner.array[0]).to.be('b');
+        expect(extended.inner.bar).to.be(undefined);
       }
     });
 

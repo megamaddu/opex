@@ -24,7 +24,7 @@ function extend(origin, add) {
     if (add.hasOwnProperty(j)) {
       right = add[j];
 
-      if ((typeof right !== 'object' && typeof right !== 'function') || right.__proto__ !== Object.prototype) {
+      if (right === null || (typeof right !== 'object' && typeof right !== 'function') || right.__proto__ !== Object.prototype) {
         origin[j] = right;
         continue;
       }
