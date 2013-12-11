@@ -91,7 +91,9 @@ describe('opex:', function () {
         y = {},
         errCb = function errCb(err) {
           expect(err.message).to.be('opex exceeded 99 levels of depth -- most likely a circular reference error');
-          done();
+          if (i === 0) {
+            done();
+          }
         },
         i = 1,
         extended;

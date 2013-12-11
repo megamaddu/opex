@@ -78,3 +78,9 @@ function App(options) {
 ```
 npm install opex
 ```
+
+# test
+
+```
+npm install -g grunt-cli
+npm test

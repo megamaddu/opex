@@ -4,41 +4,41 @@ var pkg = require('./package')
 ;
 
 function opex() {
-  var res = {}, _ = {}, i;
-  for (i in arguments) {
-    if (arguments.hasOwnProperty(i)) {
-      extend.call({ depth: 1 }, res, arguments[i] || _);
-    }
+  var res = {},
+    _ = {},
+    keys = Array.prototype.reverse.call(arguments),
+    i = arguments.length;
+  while (i--) {
+    extend(res, keys[i] || _, 0);
   }
   return res;
 }
 
-function extend(origin, add) {
-  var j, left, right;
-
-  if (this.depth > 99) {
+function extend(origin, add, depth) {
+  if (depth > 99) {
     throw new Error('opex exceeded 99 levels of depth -- most likely a circular reference error');
   }
-
-  for (j in add) {
-    if (add.hasOwnProperty(j)) {
-      right = add[j];
-
-      if (right === null || (typeof right !== 'object' && typeof right !== 'function') || right.__proto__ !== Object.prototype) {
-        origin[j] = right;
-        continue;
-      }
-
-      if (origin.hasOwnProperty(j)) {
-        left = origin[j];
-      } else {
-        origin[j] = left = {};
-      }
-
-      this.depth++;
-      extend.call(this, left, right);
-      this.depth--;
+  if (typeof add !== 'object' && typeof add !== 'function') {
+    return;
+  }
+  var keys = Array.prototype.reverse.call(Object.keys(add)),
+    i = keys.length,
+    key,
+    left,
+    right;
+  while (i--) {
+    key = keys[i];
+    right = add[key];
+    if (right === null || (typeof right !== 'object' && typeof right !== 'function') || right.__proto__ !== Object.prototype) {
+      origin[key] = right;
+      continue;
     }
+    if (origin.hasOwnProperty(key)) {
+      left = origin[key];
+    } else {
+      origin[key] = left = {};
+    }
+    extend(left, right, depth + 1);
   }
 }
 
