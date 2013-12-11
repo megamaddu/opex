@@ -1,7 +1,7 @@
 opex [![Build Status](https://travis-ci.org/spicydonuts/opex.png?branch=master)](http://travis-ci.org/spicydonuts/opex)
 ====
 
-`opex` (Option Extender) is a tiny, fast extend/mixin function with n-args and functions-as-objects support.
+`opex` (Options Extender) is a tiny, fast extend/mixin function with n-args and functions-as-objects support.
 
 ```javascript
 var opex = require('opex'),
