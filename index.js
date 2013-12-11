@@ -1,18 +1,6 @@
 'use strict';
 
-var pkg = require('./package')
-;
-
-function opex() {
-  var res = {},
-    _ = {},
-    keys = Array.prototype.reverse.call(arguments),
-    i = arguments.length;
-  while (i--) {
-    extend(res, keys[i] || _, 0);
-  }
-  return res;
-}
+var pkg = require('./package');
 
 function extend(origin, add, depth) {
   if (depth > 99) {
@@ -29,7 +17,7 @@ function extend(origin, add, depth) {
   while (i--) {
     key = keys[i];
     right = add[key];
-    if (right === null || (typeof right !== 'object' && typeof right !== 'function') || right.__proto__ !== Object.prototype) {
+    if (right === null || (typeof right !== 'object' && typeof right !== 'function') || Object.getPrototypeOf(right) !== Object.prototype) {
       origin[key] = right;
       continue;
     }
@@ -40,6 +28,17 @@ function extend(origin, add, depth) {
     }
     extend(left, right, depth + 1);
   }
+}
+
+function opex() {
+  var res = {},
+    _ = {},
+    keys = Array.prototype.reverse.call(arguments),
+    i = arguments.length;
+  while (i--) {
+    extend(res, keys[i] || _, 0);
+  }
+  return res;
 }
 
 opex.version = pkg.version;

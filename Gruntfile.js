@@ -7,6 +7,7 @@ module.exports = function (grunt) {
       all: [
         'Gruntfile.js',
         'src/*',
+        'index.js',
         'test/*.js'
       ],
       options: {
@@ -17,8 +18,8 @@ module.exports = function (grunt) {
       modify: {
         src: [
           'Gruntfile.js',
-          'src/*.js',
-          'src/data/*.js',
+          'src/*',
+          'index.js',
           'test/*.js'
         ],
         options: {
@@ -28,8 +29,8 @@ module.exports = function (grunt) {
       verify: {
         src: [
           'Gruntfile.js',
-          'src/*.js',
-          'src/data/*.js',
+          'src/*',
+          'index.js',
           'test/*.js'
         ],
         options: {
