@@ -30,7 +30,7 @@ function example(a, b, c) {
 
 # what about deep copy?
   Only where it makes sense.  `opex` is primarily indended to be used with JSON stuctures or a 'flat' object.  Rather than use a flag (or always-on/off) like some implementations, `opex` decides whether to recurse on each property individually.
-  Why?  Deep copying can be dangerous.  Best case, it's a little slower.  Worst case?  Non-enumerable properties get left behind while enumerable, this-dependent functions no longer behave as expected.  To avoid these issues while still supporting deep copy for JSON-like structures (e.g. collapsing multiple config files based on application and environment), `opex` will only deep-copy simple objects and object literals.  An object is deemed 'simple' when it's `.__proto__` property is a direct reference to ```Object.prototype```:
+  Why?  Deep copying can be dangerous.  Best case, it's a little slower.  Worst case?  Non-enumerable properties get left behind while enumerable, this-dependent functions no longer behave as expected.  To avoid these issues while still supporting deep copy for JSON-like structures (e.g. collapsing multiple config files based on application and environment), `opex` will only deep-copy simple objects and object literals.  An object is deemed 'simple' when `Object.getPrototypeOf(obj)` (`.__proto__` is deprecated) value is a direct reference to `Object.prototype`:
 ```javascript
 // which will recurse?
 {}                // yes
